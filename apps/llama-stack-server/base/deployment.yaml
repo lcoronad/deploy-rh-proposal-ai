@@ -43,6 +43,8 @@ spec:
               value: /app/cache
             - name: LLAMA_STACK_LOGGING
               value: all=debug
+            - name: MCP_SERVER_OCP_URL
+              value: http://192.168.68.122:7860/gradio_api/mcp/sse
           ports:
             - containerPort: 8321
               protocol: TCP
@@ -57,7 +59,7 @@ spec:
             - name: cache
               mountPath: /.cache
           terminationMessagePolicy: File
-          image: 'quay.io/lcoronad/llama-stack-remote-vllm:1.0.0'
+          image: 'quay.io/lcoronad/llama-stack-remote-vllm:dev-1.0.0'
           args:
             - '--config'
             - /app-config/run.yaml
@@ -66,6 +68,7 @@ spec:
       dnsPolicy: ClusterFirst
       securityContext: {}
       schedulerName: default-scheduler
+      serviceAccountName: llama-stack-server
   strategy:
     type: RollingUpdate
     rollingUpdate:

@@ -139,6 +139,6 @@ tool_groups:
 - toolgroup_id: ocp::proposal
   provider_id: model-context-protocol
   mcp_endpoint:
-    uri: "http://192.168.68.122:7860/gradio_api/mcp/sse"
+    uri: ${env.MCP_SERVER_OCP_URL:http://192.168.68.122:7860/gradio_api/mcp/sse}
 server:
   port: 8321

@@ -2,8 +2,6 @@
 apiVersion: apps/v1
 metadata:
   name: chatbot-ui
-  annotations:
-    argocd.argoproj.io/sync-wave: "5"
 spec:
   replicas: 1
   selector:
@@ -18,12 +16,12 @@ spec:
         - name: chatbot-ui
           serviceAccountName: chatbot-ui
           resources:
-            - requests:
-                cpu: 100m
-                memory: 256Mi
-              limits:
-                cpu: 500m
-                memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
           env:
             - name: ROOT_LOG_LEVEL
               value: 'INFO'
@@ -32,7 +30,7 @@ spec:
             - name: MODEL_ID
               value: 'llama-4-scout-17b-16e-w4a16'
             - name: LLAMA_STACK_BASE_URL
-              value: 'http://llama-stack-server:8321'
+              value: 'http://llamastack-server.rh-proposal-ai.svc.cluster.local:8321'
           ports:
             - containerPort: 7861
               protocol: TCP
@@ -44,6 +42,7 @@ spec:
       dnsPolicy: ClusterFirst
       securityContext: {}
       schedulerName: default-scheduler
+      serviceAccountName: chatbot-ui
   strategy:
     type: RollingUpdate
     rollingUpdate:

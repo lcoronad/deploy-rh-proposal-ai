@@ -10,7 +10,7 @@ spec:
     name: llamastack-server
     weight: 100
   port:
-    targetPort: 8321
+    targetPort: http
   wildcardPolicy: None
   tls:
     termination: edge

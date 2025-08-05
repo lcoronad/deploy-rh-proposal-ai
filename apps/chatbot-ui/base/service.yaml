@@ -1,14 +1,13 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: llamastack-server
-  annotations:
-    argocd.argoproj.io/sync-wave: "5"
+  name: chatbot-ui
 spec:
   ports:
-    - protocol: TCP
-      port: 8321
-      targetPort: 8321
+    - name: http
+      protocol: TCP
+      port: 7861
+      targetPort: 7861
   type: ClusterIP
   selector:
-    app: llamastack
+    app: chatbot-ui

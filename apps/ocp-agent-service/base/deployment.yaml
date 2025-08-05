@@ -2,8 +2,6 @@
 apiVersion: apps/v1
 metadata:
   name: ocp-agent-service
-  annotations:
-    argocd.argoproj.io/sync-wave: "5"
 spec:
   replicas: 1
   selector:
@@ -31,7 +29,7 @@ spec:
             - name: MODEL_ID
               value: 'llama-4-scout-17b-16e-w4a16'
             - name: LLAMA_STACK_BASE_URL
-              value: 'http://llama-stack-server:8321'
+              value: 'http://llamastack-server.rh-proposal-ai.svc.cluster.local:8321'
             - name: TIVALY_SEARCH_API_KEY
               value: 'your-tivaly-search-api-key'
             - name: TEMPERATURE
@@ -53,6 +51,7 @@ spec:
       dnsPolicy: ClusterFirst
       securityContext: {}
       schedulerName: default-scheduler
+      serviceAccountName: ocp-agent-service
   strategy:
     type: RollingUpdate
     rollingUpdate:

@@ -1,16 +1,14 @@
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: llamastack-server
-  annotations:
-    argocd.argoproj.io/sync-wave: "5"
+  name: chatbot-ui
 spec:
   to:
     kind: Service
-    name: llamastack-server
+    name: chatbot-ui
     weight: 100
   port:
-    targetPort: 8321
+    targetPort: http
   wildcardPolicy: None
   tls:
     termination: edge
