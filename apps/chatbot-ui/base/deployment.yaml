@@ -1,0 +1,53 @@
+﻿kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: chatbot-ui
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chatbot-ui
+  template:
+    metadata:
+      labels:
+        app: chatbot-ui
+    spec:
+      containers:
+        - name: chatbot-ui
+          serviceAccountName: chatbot-ui
+          resources:
+            - requests:
+                cpu: 100m
+                memory: 256Mi
+              limits:
+                cpu: 500m
+                memory: 512Mi
+          env:
+            - name: ROOT_LOG_LEVEL
+              value: 'INFO'
+            - name: APP_LOG_LEVEL
+              value: 'DEBUG'
+            - name: MODEL_ID
+              value: 'llama-4-scout-17b-16e-w4a16'
+            - name: LLAMA_STACK_BASE_URL
+              value: 'http://llama-stack-server:8321'
+          ports:
+            - containerPort: 7861
+              protocol: TCP
+          imagePullPolicy: Always
+          terminationMessagePolicy: File
+          image: 'quay.io/lcoronad/chatbot-proposal-ai:1.0.0'
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
