@@ -42,7 +42,7 @@ spec:
             - name: LLAMA_STACK_LOGGING
               value: all=debug
             - name: MCP_SERVER_OCP_URL
-              value: http://192.168.68.122:7860/gradio_api/mcp/sse
+              value: http://ocp-agent-service.rh-proposal-ai.svc.cluster.local:7860/gradio_api/mcp/sse
           ports:
             - containerPort: 8321
               protocol: TCP
