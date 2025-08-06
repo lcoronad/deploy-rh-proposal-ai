@@ -33,13 +33,13 @@ spec:
             - name: TIVALY_SEARCH_API_KEY
               value: 'your-tivaly-search-api-key'
             - name: TEMPERATURE
-              value: '0.7'
+              value: '0.95'
             - name: TOP_P
-              value: '0.9'
+              value: '0.95'
             - name: MAX_TOKENS
-              value: '1024'
+              value: '4096'
             - name: STREAM
-              value: 'true'
+              value: 'False'
           ports:
             - containerPort: 7860
               protocol: TCP
@@ -52,6 +52,7 @@ spec:
       securityContext: {}
       schedulerName: default-scheduler
       serviceAccountName: ocp-agent-service
+      serviceAccount: ocp-agent-service
   strategy:
     type: RollingUpdate
     rollingUpdate:

@@ -31,18 +31,29 @@ spec:
               value: 'llama-4-scout-17b-16e-w4a16'
             - name: LLAMA_STACK_BASE_URL
               value: 'http://llamastack-server.rh-proposal-ai.svc.cluster.local:8321'
+            - name: TEMPERATURE
+              value: '0.95'
+            - name: TOP_P
+              value: '0.95'
+            - name: MAX_TOKENS
+              value: '4096'
+            - name: STREAM
+              value: 'True'
+            - name: MAX_INFER_ITERS
+              value: '10'
           ports:
             - containerPort: 7861
               protocol: TCP
           imagePullPolicy: Always
           terminationMessagePolicy: File
-          image: 'quay.io/lcoronad/chatbot-proposal-ai:1.0.0'
+          image: 'quay.io/lcoronad/chatbot-proposal-ai:1.0.1'
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
       securityContext: {}
       schedulerName: default-scheduler
       serviceAccountName: chatbot-ui
+      serviceAccount: chatbot-ui
   strategy:
     type: RollingUpdate
     rollingUpdate:

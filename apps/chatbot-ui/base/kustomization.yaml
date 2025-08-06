@@ -6,8 +6,3 @@ resources:
   - service.yaml
   - route.yaml
   - serviceAccount.yaml
-
-configMapGenerator:
-    - name: run-config
-      files:
-        - run.yaml
