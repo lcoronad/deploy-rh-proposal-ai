@@ -41,12 +41,14 @@ spec:
               value: 'True'
             - name: MAX_INFER_ITERS
               value: '10'
+            - name: VECTOR_DB_ID_OCP
+              value: 'ocp_rh_vector_db'
           ports:
             - containerPort: 7861
               protocol: TCP
           imagePullPolicy: Always
           terminationMessagePolicy: File
-          image: 'quay.io/lcoronad/chatbot-proposal-ai:1.0.1'
+          image: 'quay.io/lcoronad/chatbot-proposal-ai:1.0.2'
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
